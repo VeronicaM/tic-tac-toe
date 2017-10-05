@@ -3,10 +3,11 @@ var CHOICE_X = "X",
     choice,
     gameMatrix = [],
     PLAYER = 1,
-    COMPUTER = -1,
+    COMPUTER = 2,
     WIN_PLAYER = "You won !",
     WIN_COMPUTER = "Computer won !",
-    DRAW = "Nobody won !";
+    DRAW = "Nobody won !",
+    win = false;;
 
 //init game matrix
 for (var i = 0; i < 3; i++) {

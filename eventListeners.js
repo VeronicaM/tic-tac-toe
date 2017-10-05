@@ -11,13 +11,20 @@ $(".cell").click(function(e) {
     var text = $(this).text();
     var index = $(this).attr('index');
 
-    if (!text) {
+    if (!text && !win) {
         $(this).text(choice);
         makeChoice(index, PLAYER);
-        makeChoiceComputer();
-        var win = checkWin();
-        if (win) {
-            alert('win ' + win);
+        var winCondition = checkWin();
+        if (winCondition) {
+            win = true;
+            alert('win ' + winCondition);
+        } else {
+            makeChoiceComputer();
+            winCondition = checkWin();
+            if (winCondition) {
+                win = true;
+                alert('win ' + winCondition);
+            }
         }
     }
 });
