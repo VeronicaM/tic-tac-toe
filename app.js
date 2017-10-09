@@ -7,7 +7,7 @@ var CHOICE_X = "X",
     WIN_PLAYER = "You won !",
     WIN_COMPUTER = "Computer won !",
     DRAW = "Nobody won !",
-    win = false;;
+    win = false;
 
 //init game matrix
 for (var i = 0; i < 3; i++) {

@@ -13,14 +13,14 @@ $(".cell").click(function(e) {
 
     if (!text && !win) {
         $(this).text(choice);
-        makeChoice(index, PLAYER);
-        var winCondition = checkWin();
+        makeChoice(gameMatrix, index, PLAYER);
+        var winCondition = checkWin(gameMatrix, PLAYER);
         if (winCondition) {
             win = true;
             alert('win ' + winCondition);
         } else {
-            makeChoiceComputer();
-            winCondition = checkWin();
+            makeChoiceComputer(gameMatrix);
+            winCondition = checkWin(gameMatrix, COMPUTER);
             if (winCondition) {
                 win = true;
                 alert('win ' + winCondition);
