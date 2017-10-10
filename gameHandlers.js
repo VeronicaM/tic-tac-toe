@@ -43,30 +43,39 @@ function getRandomChoice(board) {
 function checkWin(board, player) {
     //rows and columns
     var countPlayerRow = 0,
-        countPlayerCol = 0;
+        countPlayerCol = 0,
+        winningComboRow = [],
+        winningComboCol = [];
     var winResult = player === COMPUTER ? WIN_COMPUTER : WIN_PLAYER;
     for (var i = 0; i < 3; i++) {
         for (var j = 0; j < 3; j++) {
             if (board[i][j] === player) {
                 countPlayerRow++;
+                winningComboRow.push(i + "," + j);
             }
             if (board[j][i] === player) {
                 countPlayerCol++;
+                winningComboCol.push(j + "," + i);
             }
         }
-        if (countPlayerRow === 3 || countPlayerCol === 3) {
-            return winResult;
+        if (countPlayerRow === 3) {
+            return [winResult, winningComboRow];
+        } else if (countPlayerCol === 3) {
+            return [winResult, winningComboCol];
         } else {
             countPlayerRow = 0;
             countPlayerCol = 0;
+            winningComboRow = [];
+            winningComboCol = [];
         }
 
     }
+
     //diagonal 1
     if (board[0][0] === player &&
         board[1][1] === player &&
         board[2][2] === player) {
-        return winResult;
+        return [winResult, ["0,0", "1,1", "2,2"]];
     }
 
 
@@ -74,13 +83,14 @@ function checkWin(board, player) {
     if (board[0][2] === player &&
         board[1][1] === player &&
         board[2][0] === player) {
-        return winResult;
+        return [winResult, ["0,2", "1,1", "2,0"]];
     }
     //draw
     //flatten gameMatrix array and check for remaining not taken cells
     if (checkDraw(board)) {
-        return DRAW;
+        return [DRAW, []];
     }
+    return [];
 }
 
 function checkDraw(board) {
@@ -174,4 +184,14 @@ function minmax(newBoard, player) {
 
 function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function startGame() {
+    win = false;
+    for (var i = 0; i < 3; i++) {
+        gameMatrix[i] = [];
+        for (var j = 0; j < 3; j++) {
+            gameMatrix[i][j] = 0;
+        }
+    }
 }

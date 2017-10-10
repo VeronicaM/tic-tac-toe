@@ -14,17 +14,32 @@ $(".cell").click(function(e) {
     if (!text && !win) {
         $(this).text(choice);
         makeChoice(gameMatrix, index, PLAYER);
-        var winCondition = checkWin(gameMatrix, PLAYER);
-        if (winCondition) {
+        var winResult = checkWin(gameMatrix, PLAYER);
+        var winCondition = winResult[0];
+        if (winCondition === WIN_PLAYER) {
             win = true;
-            alert('win ' + winCondition);
+            colorWin(winResult[1], "green");
+            wins++;
+            alert(winCondition);
+            updateScore("wins", wins);
+        } else if (winCondition === DRAW) {
+            alert(DRAW);
+            startGame();
+            drawNewGame();
         } else {
             makeChoiceComputer(gameMatrix);
-            winCondition = checkWin(gameMatrix, COMPUTER);
-            if (winCondition) {
+            winResult = checkWin(gameMatrix, COMPUTER);
+            winCondition = winResult[0];
+            if (winCondition === WIN_COMPUTER) {
                 win = true;
-                alert('win ' + winCondition);
+                losses++;
+                updateScore("losses", losses);
+                colorWin(winResult[1], "red");
+                alert(winCondition);
             }
         }
+    } else {
+        startGame();
+        drawNewGame();
     }
 });
