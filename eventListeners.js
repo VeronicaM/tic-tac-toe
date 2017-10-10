@@ -38,7 +38,7 @@ $(".cell").click(function(e) {
                 alert(winCondition);
             }
         }
-    } else {
+    } else if (win) {
         startGame();
         drawNewGame();
     }
