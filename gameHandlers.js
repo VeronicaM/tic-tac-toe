@@ -126,7 +126,7 @@ function minmax(newBoard, player) {
     var moves = [];
     // checks for the terminal states such as win, lose, and tie and returning a value accordingly
 
-    var winCondition = checkWin(newBoard, player);
+    var winCondition = checkWin(newBoard, player)[0];
     if (winCondition === WIN_PLAYER) {
         return { score: -10 };
     } else if (winCondition === WIN_COMPUTER) {
